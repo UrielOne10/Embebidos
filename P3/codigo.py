@@ -6,10 +6,6 @@ import math
 
 
 
-class HeartRateMonitor:
-    def __init__(self, ventana=10):
-        self.lista = []
-        self.ventana = ventana
 
     def agregarElemento(self, dato):
         self.lista.append(dato)

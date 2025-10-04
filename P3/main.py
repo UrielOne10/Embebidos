@@ -30,65 +30,78 @@ BtnEstado.irq(handler=cambiar_estado, trigger=Pin.IRQ_FALLING)
 # CONFIG ADC
 def CONFIG_ADC():
     global adc
-    adc = ADC(Pin(0))  
+    adc = ADC(Pin(0))
     adc.atten(ADC.ATTN_0DB)      # rango ~0 - 1.1 V
     adc.width(ADC.WIDTH_12BIT)   # resolución 0 - 4095
 
 def leer_temperatura():
     VREF = 1.1
     ADC_MAX = 4095
-    lectura = adc.read()             
-    voltaje = (lectura * VREF) / ADC_MAX  
+    lectura = adc.read()
+    voltaje = (lectura * VREF) / ADC_MAX
     temperatura = ((voltaje * 1000) / 10)   # ejemplo: 10 mV/°C
     return temperatura, voltaje, lectura
-
 
 def promedio():
     tamano = 100
     global vector
     if len(vector) == tamano:
-        promedio = sum(vector) / tamano
+        prom = sum(vector) / tamano
         vector = []
-        return promedio, True
+        return prom, True
     else:
-        return 0, False 
+        return 0, False
 
 def Mostrar(temp_promedio):
     lcd.clear()
-    lcd.putstr("Temp: "+"{:.2f} ".format(temp_promedio)+chr(223)+"C")
-    
-# =============================
+    lcd.move_to(0, 0)
+    lcd.putstr("Temp: {:.2f}".format(temp_promedio) + chr(223) + "C")
+
+    # Estado del foco
+    FOCO = Foco.value()
+    VENTILADOR = Ventilador.value()
+
+    lcd.move_to(0, 1)
+    if FOCO == 1 and VENTILADOR == 0:
+        lcd.putstr("Foco: ENCENDIDO ")
+    elif FOCO == 0 and VENTILADOR == 1:
+        lcd.putstr("Vent: ENCENDIDO ")
+    elif FOCO == 1 and VENTILADOR == 1:
+        lcd.putstr("Ambos encendidos")
+    else:
+        lcd.putstr("Todo apagado   ")
+
 # PROGRAMA PRINCIPAL
-# =============================
 CONFIG_ADC()
 CONFIG_LCD()
 
-
-margen =2
+margen = 2
 temp_deseada = 35
 
 while True:
     temp, volt, lec = leer_temperatura()
     vector.append(temp)
     temp_promedio, listo = promedio()
+
     if listo:
-        
-# # # # # # #         logica
-        if temp_promedio < temp_deseada - (margen/2):
+        # ---- Lógica de control ----
+        if temp_promedio < temp_deseada - (margen / 2):
             Foco.on()
             Ventilador.off()
-        elif temp_promedio > temp_deseada - (margen/2) and temp_promedio < temp_deseada + (margen/2):
-            None
-        elif temp_promedio > temp_deseada +(margen/2):
+        elif temp_promedio > temp_deseada + (margen / 2):
             Foco.off()
             Ventilador.on()
-        
-        
-        print("temp:{:0.2f}".format(temp_promedio))
-        print(Foco.value())
-        print(Ventilador.value())
-        Mostrar(temp_promedio)   # <<< ahora sí muestra en LCD
+        else:
+            # Dentro del margen, no cambia estado
+            pass
+
+        # ---- Mostrar en consola y LCD ----
+        print("Temp promedio: {:.2f} °C".format(temp_promedio))
+        print("Foco:", Foco.value(), "| Ventilador:", Ventilador.value())
+        Mostrar(temp_promedio)
+
     sleep(0.01)
+
 
             
 

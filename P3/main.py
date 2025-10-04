@@ -62,11 +62,27 @@ def Mostrar(temp_promedio):
 CONFIG_ADC()
 CONFIG_LCD()
 
+
+margen =4
+temp_deseada = 35
+
 while True:
     temp, volt, lec = leer_temperatura()
     vector.append(temp)
     temp_promedio, listo = promedio()
     if listo:
+        
+# # # # # # #         logica
+        if temp_promedio < temp_deseada - (margen/2):
+            foco.on()
+            ventilador.off()
+        else if temp_promedio > temp_deseada - (margen/2) and temp_promedio < temp_deseada + (margen/2):
+            None
+        else if temp_promedio > temp_deseada +(margen/2):
+            foco.off()
+            ventilador.on()
+        
+        
         print("temp:{:0.2f}".format(temp_promedio))
         Mostrar(temp_promedio)   # <<< ahora sí muestra en LCD
     sleep(0.01)

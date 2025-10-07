@@ -1,0 +1,16 @@
+#Boucing
+#Importar libreriaas
+from machine import Pin
+import time
+
+#declaracion a variables a usar
+button = Pin(22, Pin.IN, Pin.PULL_DOWN)#Entrada para que mande la señal
+conteodebounce=0 #Conteo de cuantas veces se hara el boucneg
+print("Esperando a que el boton se presione")# Msj de espera hasta que envie la instruccion
+
+while True:
+        if button.value()==1:
+            conteodebounce +=1   #Actualizacion del valor  al momento de ser presionado
+            print("Numero ,de rebotes:",conteodebounce,"Tiempo echo en cada interacion:", time.ticks_ms())  #Vizualizacion de rebotes
+            time.sleep(0.05)   #Tiempo de espera para vizualizacion de cada rebote
+            

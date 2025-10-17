@@ -26,19 +26,9 @@ adc2.width(ADC.WIDTH_12BIT)
 # =================== CONFIGURACION UART ===================
 uart = UART(1, baudrate=9600, tx=17, rx=16)
 
-# =================== CONFIGURACION MAX30102 ===================
-sensor = MAX30102(i2c=i2c)
-sensor.setup_sensor()
-sensor.set_pulse_amplitude_red(MAX30105_PULSE_AMP_MEDIUM)
-sensor.set_pulse_amplitude_ir(MAX30105_PULSE_AMP_MEDIUM)
 
-# =================== VARIABLES GLOBALES ===================
-vector = []
-tamano = 10
-ventana_red = []
-ventana_ir = []
-VENTANA_SIZE = 30
 
+# =================== VARIABLES DE ESTADO ===================
 estado = "APAGADO"
 activo = None
 
@@ -105,27 +95,6 @@ try:
 
         # ===== Temperatura ADC2  =====
         temp2 = leer_temperatura_lcd()
-
-        # ===== MAX30102 =====
-        sensor.check()
-        red = None
-        spo2 = None
-        if sensor.available():
-            red = sensor.pop_red_from_storage()
-            ir = sensor.pop_ir_from_storage()
-            ventana_red.append(red)
-            ventana_ir.append(ir)
-
-            if len(ventana_red) > VENTANA_SIZE:
-                ventana_red.pop(0)
-                ventana_ir.pop(0)
-
-            # Ejemplo: SpO2 estimado
-            if len(ventana_red) == VENTANA_SIZE:
-                spo2 = sum(ventana_red)/VENTANA_SIZE
-                print("RED: {:04d}, SpO2*: {:.2f}".format(red, spo2))
-            else:
-                print("RED: {:04d}".format(red))
 
         # ===== LCD =====
         if estado == "APAGADO":

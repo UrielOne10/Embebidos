@@ -6,8 +6,8 @@ Se implementa el control de un LED RGB tipo NeoPixel mediante 3 botones físicos
 
 | Variable | GPIO | Resistencia Interna | Función |
 |:----|:---------|:-------------|:--------------------------|
-| b1 | 3 | Pull-down | Enciende el LED en color fijo parpadeante |
-b2|4|Pull-down|Inicia una secuencia de arcoiris|
+| b1 | 4 | Pull-down | Enciende el LED en color fijo parpadeante |
+b2|3|Pull-down|Inicia una secuencia de arcoiris|
 b3|1|Pull-up|Apaga el LED y entra a modo DeepSleep|
 n|8|Sin definir|LED RGB incorporado|
 
@@ -21,3 +21,6 @@ Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente
 Metodos usados desde micrpython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
 - [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)
+
+## Conexión
+<img width="598" height="464" alt="image" src="https://github.com/user-attachments/assets/f20e1e9e-9af4-4818-b037-fcffea74df03" />

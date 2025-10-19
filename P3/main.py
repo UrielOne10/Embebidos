@@ -17,6 +17,7 @@ estado = False
 vector = []
 Foco = Pin(3, Pin.OUT)
 Ventilador = Pin(2, Pin.OUT)
+tiempo_sleep_ms = 5000  # tiempo de sleep en milisegundos (5 segundos)
 
 # INTERRUPCION EXTERNA
 def cambiar_estado(pin):
@@ -99,8 +100,15 @@ while True:
         print("Temp promedio: {:.2f} °C".format(temp_promedio))
         print("Foco:", Foco.value(), "| Ventilador:", Ventilador.value())
         Mostrar(temp_promedio)
+        
+        if estado:
+             # ---- Entra en modo ahorro ----
+            print("Entrando en modo sleep por", tiempo_sleep_ms / 1000, "s...")
+            lightsleep(tiempo_sleep_ms)
+            # Al terminar el sleep, se despierta y repite el ciclo
 
     sleep(0.01)
+    
 
 
             

@@ -1,9 +1,13 @@
-Control de LED RGB con botones 
+# Control de LED RGB con botones 
 
-Descripción general
+## Descripción general
 Se implementa el control de un LED RGB tipo NeoPixel mediante 3 botones físicos. El sistema permite alternar entre modos de iluminación al igual que activar el modo de ahorro de energía.
+## Funcionalidad del sistema 
 
-<img width="666" height="126" alt="image" src="https://github.com/user-attachments/assets/f87c1cc6-1b65-4629-a31e-085990043516" />
-
+| Boton | GPIO | Resistencia Interna | Función |
+|:----|:---------|:-------------|:--------------------------|
+| b1 | 10 | Pull-down | Enciende el LED en color fijo parpadeante |
+b2|11|Pull-down|Inicia una secuencia de arcoiris|
+b3|1|Pull-up|Apaga el LED y entra a modo DeepSleep|
 
 

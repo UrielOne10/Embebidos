@@ -11,3 +11,12 @@ b2|11|Pull-down|Inicia una secuencia de arcoiris|
 b3|1|Pull-up|Apaga el LED y entra a modo DeepSleep|
 
 Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente el monitoreo constante de el valor del pin.
+
+## Hardware
+- Esp32 C6
+- Push button
+  
+## Software
+Metodos usados desde micrpython
+- [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
+- [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)

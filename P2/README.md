@@ -5,6 +5,13 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 # Funcionalidad del sistema
 | Variable | GPIO | Resistencia Interna | Función |
 |:-- |:-- |:-- |:--|
+|btn1|||
+|:-- |:-- |:-- |:--|
+|btn1rising|||
+|:-- |:-- |:-- |:--|
+|btn2|||
+|:-- |:-- |:-- |:--|
+
 # Hardware
 # Software
 # Conexión

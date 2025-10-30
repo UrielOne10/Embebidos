@@ -17,4 +17,5 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 # Software
 Metodos usados desde micropython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
+- [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)
 # Conexión

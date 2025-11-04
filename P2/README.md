@@ -19,6 +19,6 @@ Metodos usados desde micropython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
 - [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)
 ## Conexión
-<img width="400" height="200" alt="image" src="ht" />
+<img width="400" height="200" alt="image" src="P2/Pror.png" />
 
 *Figura 1. Esquema general del sistema.*

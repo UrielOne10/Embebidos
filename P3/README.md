@@ -3,11 +3,11 @@
 Se obendran señales externas mediante los sensores analogicos, por medio de una clasificacion binaria. Esto estara relacionado a umbral que estara activando o desactivando un actuador fisico.
 ## Funcionalidad del sistema
 ## Hardware
--LCD con modulo I2C 
--FOCO 127VAC 
--LM35 
--VENTILADOR 
--ESP32 C6 
+- LCD con modulo I2C 
+- Foco 127VAC 
+- LM35 
+- Ventilador 
+- ESP32 C6
 ## Software
 
 ## Conexión

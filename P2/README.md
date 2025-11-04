@@ -5,9 +5,10 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 ## Funcionalidad del sistema
 | Variable | GPIO | Resistencia Interna | Función |
 |:----|:----|:----|:----|
-|btn1|1|PULL UP|Hacer un barrido hacia el lado derecho|
+|btn1|1|PULL UP||
 |btn1rising|1|PULL UP||
-|btn2|4|PULL DOWN|Mostrar un mensaje "Hola", desactivar el modo "sleep"|
+|btn2|4|PULL DOWN||
+
 
 
 ## Hardware

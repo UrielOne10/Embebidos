@@ -11,6 +11,6 @@ Se obendran señales externas mediante los sensores analogicos, por medio de una
 ## Software
 
 ## Conexión
-<img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/f20e1e9e-9af4-4818-b037-fcffea74df03" />
+<img width="400" height="200" alt="image" src="https://github.com/UrielOne10/Embebidos/blob/bba406a42e5623f357f35ab4b759f97e19c8eb98/P3/Circuito_3.png" />
 
 *Figura 1. Esquema general del sistema.*

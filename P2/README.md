@@ -19,6 +19,6 @@ Metodos usados desde micropython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
 - [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)
 ## Conexión
-<img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/f20e1e9e-9af4-4818-b037-fcffea74df03" />
+<img width="400" height="200" alt="image" src="ht" />
 
 *Figura 1. Esquema general del sistema.*

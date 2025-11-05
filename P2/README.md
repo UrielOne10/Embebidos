@@ -8,9 +8,9 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 |btn1|1|PULL UP|Saldra del modo LIGHTSLEEP|
 |btn1rising|1|PULL UP|Entrara al modo LIGHTSLEEP|
 |btn2|4|PULL DOWN|Movimiento en la pantalla LCD|
-|i2c|scl=7,sda=6|7k ohms|Mandar informaciòn a la pantalla LCD|
+|i2c|7 y 6|7k ohms|Mandar informaciòn a la pantalla LCD|
 
-Cabe mencionar que, el mismo "btn1" mantendra un mensaje estatitco con el cual se sabra si salio del mismo modo LIGHTSLEEP. A su vez que, el "btn2" mandara los mensajes dependiendo del nùmero de pulsaciones que se esten ejecutando con el boton analogico. Con ello los pines 7 y 8 estan predeterminados para el modo i2c de la pantalla LCD.
+Cabe mencionar que, el mismo "btn1" mantendra un mensaje estatitco con el cual se sabra si salio del mismo modo LIGHTSLEEP. A su vez que, el "btn2" mandara los mensajes dependiendo del nùmero de pulsaciones que se esten ejecutando con el boton analogico. Con ello los pines 7 y 8 estan predeterminados para el modo i2c de la pantalla LCD con el ESP32, siendo su comunicaiòn SCL Y SDA.
 
 ## Hardware
 - Esp32 C6

@@ -2,6 +2,13 @@
 ## Descripción general
 Se obendran señales externas mediante los sensores analogicos, por medio de una clasificacion binaria. Esto estara relacionado a un umbral que estara activando o desactivando un actuador fisico.
 ## Funcionalidad del sistema
+| Variable | GPIO | Resistencia Interna | Función |
+|:----|:----|:----|:----|
+| i2c | 7 y 8 | 7k ohms| |
+| Foco | 3 | Sin especificaciones  | |
+| Ventilador | 2 | Sin especificaciones | |
+| BtnEstado | 1 | PULL-DOWN | |
+
 ## Hardware
 - LCD con modulo I2C 
 - Foco 127VAC 

@@ -11,7 +11,7 @@ Se obendran señales externas mediante los sensores analogicos, por medio de una
 | adc | 0 | Sin especificaciones | Guardar el valor de temperatura |
 | adc2 | 34 | Sin especificaciones |Comparacion de los rangos de voltaje |
 
-Cabe mencionar que al implementar el modo sleep, durante el perdiodo de 5 segundos se detiene el proceso para ahorrar energia en le esp32. Esto a su vez, que las variables de adc y adc 2 estaran en contante evaluacion, debido que se tendra una comparacion con la temperarura minima, actual y maxima. Con ello los pines 7 y 8 estan predeterminados para el modo i2c de la pantalla LCD con el ESP32, siendo su comunicaiòn SCL Y SDA.
+Cabe mencionar que al implementar el modo sleep, durante el perdiodo de 5 segundos se detiene el proceso para ahorrar energia en le esp32. Esto a su vez, que las variables de adc y adc 2 estaran en contante evaluacion, debido que se tendra una comparacion con la temperarura minima, actual y maxima. Con ello los pines 7 y 8 estan predeterminados para el modo i2c de la pantalla LCD con el ESP32, siendo su comunicaiòn SCL Y SDA
 
 ## Hardware
 - LCD con modulo I2C 

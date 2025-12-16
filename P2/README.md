@@ -15,7 +15,7 @@ Cabe mencionar que, el mismo "btn1" mantendra un mensaje estatitco con el cual s
 ## Hardware
 - Esp32 C6
 - Push button
-- Pantala LCD
+- Pantalla LCD
 ## Software
 Metodos usados desde micropython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)

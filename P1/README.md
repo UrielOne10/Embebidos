@@ -22,7 +22,7 @@ from machine import Pin, deepsleep
 from neopixel import NeoPixel 
 import time
 ```
-## pines utilizados
+## Pines utilizados
 Para poder agilizar los codigos, en la declaracion de GPIO's se usará un formato de diccionarios JSON, donde se declara el nombre y numero del pin, al igual que su configuracion de resistencia interna, junto con un valor que define si esta exitado dicho pin.
 ```python
 btns = {
@@ -38,6 +38,29 @@ def configIO():
         pines[nombre] = Pin(cfg["pin"], Pin.IN, cfg["pull"])
     pines["rgb"] = neopixel.NeoPixel(Pin(8),1)
 ```
+La lectura de los pines se hace de manera periodica a traves de la función.
+```python
+def leerBtn():
+    for nombre, cfg in btns.items():
+        if pines[nombre].value() == cfg["activo"]:
+            return nombre
+    return None
+```
+## Logica de led RGB
+En base al boton presionado se vera afectada la función a ser llamada en el fragmento.
+```python
+    if btn in btns:
+        funciones[btn]()
+```
+El cual es un diccionario que redirecciona a la funcion segun cual sea el boton presionado.
+```python
+funciones = {
+    "b1": def_color_fijo,
+    "b2": def_secuencia,
+    "b3": def_sleep
+    }    
+```
+
 Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente el monitoreo constante de el valor del pin. Mientras que el pin 8 es el pin asociado a nuestro RGB, siendo esta asociación del GPIO obligatoria.
 
 ## Hardware

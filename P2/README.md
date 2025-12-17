@@ -15,7 +15,9 @@ tendrá 3 configuraciones basadas en la cantidad de pulsaciones en un tiempo det
 | 1 | El mensaje realiza un corrimiento de izquierda a derecha |  
 | 2 | El mensaje realiza un corrimiento de derecha a izquierda |  
 | 3 | El mensaje se queda quieto |  
+
 Para evitar entradas rebote por parte de la acción mecánica del boton, se adapto una funcion de antirrebote
+
 ```python
 def antirrebote(nombre, intervalo_ms=500):
     global last_ms

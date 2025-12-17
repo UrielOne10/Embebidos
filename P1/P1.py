@@ -71,7 +71,6 @@ def configIO():
     pines["rgb"] = neopixel.NeoPixel(Pin(8),1)
 configIO()
 
-last_ms = {}
 def leerBtn():
     for nombre, cfg in btns.items():
         if pines[nombre].value() == cfg["activo"]:

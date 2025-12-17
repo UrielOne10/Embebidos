@@ -11,7 +11,6 @@ b2|3|Pull-down|Inicia una secuencia de arcoiris|
 b3|1|Pull-up|Apaga el LED y entra a modo DeepSleep|
 n|8|Sin definir|LED RGB incorporado|
 ## Librerias utilizadas
-
 | Librerias | Función |
 |:----|:---------|
 | Machine | Pin:Control de los pines del esp, Deepsleep:Control de modo descanso profundo|
@@ -22,6 +21,44 @@ n|8|Sin definir|LED RGB incorporado|
 from machine import Pin, deepsleep
 from neopixel import NeoPixel 
 import time
+```
+## Pines utilizados
+Para poder agilizar los codigos, en la declaracion de GPIO's se usará un formato de diccionarios JSON, donde se declara el nombre y numero del pin, al igual que su configuracion de resistencia interna, junto con un valor que define si esta exitado dicho pin.
+```python
+btns = {
+    "b1": {"pin": 3, "pull": Pin.PULL_DOWN, "activo": 1},
+    "b2": {"pin": 4, "pull": Pin.PULL_DOWN, "activo": 1},
+    "b3": {"pin": 1, "pull": Pin.PULL_UP,   "activo": 0},
+}
+```
+Su configuración se realiza a traves de la función.
+```python
+def configIO():
+    for nombre, cfg in btns.items():
+        pines[nombre] = Pin(cfg["pin"], Pin.IN, cfg["pull"])
+    pines["rgb"] = neopixel.NeoPixel(Pin(8),1)
+```
+La lectura de los pines se hace de manera periodica a traves de la función.
+```python
+def leerBtn():
+    for nombre, cfg in btns.items():
+        if pines[nombre].value() == cfg["activo"]:
+            return nombre
+    return None
+```
+## Logica de led RGB
+En base al boton presionado se vera afectada la función a ser llamada en el fragmento.
+```python
+    if btn in btns:
+        funciones[btn]()
+```
+El cual es un diccionario que redirecciona a la funcion segun cual sea el boton presionado.
+```python
+funciones = {
+    "b1": def_color_fijo,
+    "b2": def_secuencia,
+    "b3": def_sleep
+    }    
 ```
 
 Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente el monitoreo constante de el valor del pin. Mientras que el pin 8 es el pin asociado a nuestro RGB, siendo esta asociación del GPIO obligatoria.

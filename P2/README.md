@@ -30,7 +30,7 @@ tendrá 3 configuraciones basadas en la cantidad de pulsaciones en un tiempo det
 |:----|:----|
 | 1 | El mensaje realiza un corrimiento de izquierda a derecha |  
 | 2 | El mensaje realiza un corrimiento de derecha a izquierda |  
-| 3 | El mensaje se queda quieto |  
+| 3 | El mensaje se queda quieto 
  A traves de un timer con un periodo de 1 seg 
  ```python
  t1.init(mode=Timer.PERIODIC,period=1000,callback=rstConteo)

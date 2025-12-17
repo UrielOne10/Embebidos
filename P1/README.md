@@ -23,13 +23,20 @@ from neopixel import NeoPixel
 import time
 ```
 ## pines utilizados
-Para poder agilizar los codigos, en la declaracion de GPIO's se usar[a un formato de diccionarios JSON, donde se declara el nombre y numero del pin, al igual que su configuracion de resistencia interna, junto con un valor que define si esta exitado dicho pin.
+Para poder agilizar los codigos, en la declaracion de GPIO's se usará un formato de diccionarios JSON, donde se declara el nombre y numero del pin, al igual que su configuracion de resistencia interna, junto con un valor que define si esta exitado dicho pin.
 ```python
 btns = {
     "b1": {"pin": 3, "pull": Pin.PULL_DOWN, "activo": 1},
     "b2": {"pin": 4, "pull": Pin.PULL_DOWN, "activo": 1},
     "b3": {"pin": 1, "pull": Pin.PULL_UP,   "activo": 0},
 }
+```
+Su configuración se realiza a traves de la función.
+```python
+def configIO():
+    for nombre, cfg in btns.items():
+        pines[nombre] = Pin(cfg["pin"], Pin.IN, cfg["pull"])
+    pines["rgb"] = neopixel.NeoPixel(Pin(8),1)
 ```
 Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente el monitoreo constante de el valor del pin. Mientras que el pin 8 es el pin asociado a nuestro RGB, siendo esta asociación del GPIO obligatoria.
 

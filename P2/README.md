@@ -31,6 +31,11 @@ tendrá 3 configuraciones basadas en la cantidad de pulsaciones en un tiempo det
 | 1 | El mensaje realiza un corrimiento de izquierda a derecha |  
 | 2 | El mensaje realiza un corrimiento de derecha a izquierda |  
 | 3 | El mensaje se queda quieto |  
+ A traves de un timer con un periodo de 1 seg 
+ ```python
+ t1.init(mode=Timer.PERIODIC,period=1000,callback=rstConteo)
+ ```
+Se va contando la cantidad de pulsos hechos. El callback resetea dicho conteo.
 
 ## Funcionalidad del sistema antirrebotes
 Para evitar entradas rebote por parte de la acción mecánica del boton, se adapto una funcion de antirrebote
@@ -45,6 +50,7 @@ def antirrebote(nombre, intervalo_ms=500):
     last_ms[nombre] = now
     return True
 ```
+Esta a traves de un diccionario donde se le da un nombre a cada variable de la que queremos detectar antirrebotes nos entrega un True o False, en funcion del tiempo intervalo_ms propuesto
 
 
 ## Hardware

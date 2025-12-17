@@ -1,49 +1,96 @@
-from machine import Pin, deepsleep                             #librerias que se necesitan para realizar la práctica
-from neopixel import NeoPixel                                  #neopixel:control de LED RGB, Time:Control de delays
-import time                                                    #Pin:Control de los pines del esp, Deepsleep:Control de
-                                                               #modo descanso profundo
-i=0                                                            #variable ocupada para el barrido
-p=Pin(8,Pin.OUT)                                               #declaración del pin para control del RGB
-n=NeoPixel(p,1)                                                #declaración para el usar el RGB
-b1=Pin(3,Pin.IN,Pin.PULL_DOWN)                                #declaración del primer boton fisico usando resistencia pull-down
-b2=Pin(4,Pin.IN,Pin.PULL_DOWN)                                #declaración del segundo boton fisico usando resistencia pull-down
-b3=Pin(1,Pin.IN,Pin.PULL_UP)                                   #declaración del tercer boton fisico usando resistencia pull-up
 
-arcoiris=[                                                     #arreglo para el barrido de colores
-    (255, 0, 0),                                               # Rojo
-    (255, 165, 0),                                             # Naranja
-    (255, 255, 0),                                             # Amarillo
-    (0, 255, 0),                                               # Verde
-    (0, 0, 255),                                               # Azul
-    (128, 0, 128),                                             # Morado
-    (0, 0, 255),                                               # Azul
-    (0, 255, 0),                                               # Verde
-    (255, 255, 0),                                             # Amarillo
-    (255, 165, 0),                                             # Naranja
-    (255, 0, 0)                                                # Rojo
-    ]
+from machine import Pin,lightsleep
+import time
+import neopixel
 
-while True:                                                    #Inicio del programa principal
-    if b1.value()==1:     #Entrada 1                           #Inicio del uso del boton 1
-        while b2.value()==0 and b3.value()==1:                 #Condición para mantener el blink en un bucle infinito
-            n[0] = (143, 0, 255)                               #Color escogido: Violeta
-            n.write()                                          #Comando para imprimir el color en el RGB
-            time.sleep(0.3)                                    #Tiempo dado para que se vea el color (dado en segundos)
-            n[0] = (0, 0, 0)                                   #Color para "apagar" el RGB
-            n.write()                                          #Comando para imprimir el "color" en el RGB
-            time.sleep(0.3)                                    #Tiempo dado para que se vea el "color" (dado en segundos)
-    if b2.value() == 1:   #Entrada 2                           #Inicio del uso del boton 2
-        time.sleep(0.3)                                        #Da tiempo para un "antirrebote"
-        while True:                                            #Condicipon del boton 2
-            n[0] = arcoiris[i % len(arcoiris)]                 #Usa un color del arreglo "arcoirirs" y asi mismo se usa para el bucle infinito
-            n.write()                                          #Comando para imprimir el color en el RGB
-            i += 1                                             #Cambia el color segun el arreglo "arcoiris"
-            time.sleep(0.2)                                    # Velocidad de cambio de color
-            if b3.value()==0 or b1.value()==1:                 #Condición para terminar el bucle infinito y poner a dormir el esp o regresar al boton 1
-                break                                          #Sale del bucle
-    if b3.value()==0:     #Entarda 3                            #Inicio del uso del boton 3
-        n[0] = (0, 0, 0)                                       #Apaga el RGB
-        n.write()                                              #Apaga el RGB
-        print("EL ESP32 se puso a mimir zzz")     #Nos imprime en la computadora para saber que el ESP esta en modo deepsleep
-        time.sleep(0.2)                                        #Tiempo para entrar en modo deepsleep
-        deepsleep()                                            #El esp ya entra en modo sleep
+pines = {}
+btns = {
+    "b1": {"pin": 3, "pull": Pin.PULL_DOWN, "activo": 1},
+    "b2": {"pin": 4, "pull": Pin.PULL_DOWN, "activo": 1},
+    "b3": {"pin": 1, "pull": Pin.PULL_UP,   "activo": 0},
+}
+colores = [0,0,0]
+def def_color_fijo():
+    colores[0] = 0 if colores[0] else 255
+    pines["rgb"][0] = colores
+    pines["rgb"].write()
+    
+fase = 0
+def def_secuencia():
+    global fase
+    step = 10
+    if fase == 0:   # R -> Y
+        colores[1] += step
+        if colores[1] >= 255:
+            colores[1] = 255
+            fase = 1
+
+    elif fase == 1: # Y -> G
+        colores[0] -= step
+        if colores[0] <= 0:
+            colores[0] = 0
+            fase = 2
+
+    elif fase == 2: # G -> C
+        colores[2] += step
+        if colores[2] >= 255:
+            colores[2] = 255
+            fase = 3
+
+    elif fase == 3: # C -> B
+        colores[1] -= step
+        if colores[1] <= 0:
+            colores[1] = 0
+            fase = 4
+
+    elif fase == 4: # B -> M
+        colores[0] += step
+        if colores[0] >= 255:
+            colores[0] = 255
+            fase = 5
+
+    elif fase == 5: # M -> R
+        colores[2] -= step
+        if colores[2] <= 0:
+            colores[2] = 0
+            fase = 0
+
+    pines["rgb"][0] = colores
+    pines["rgb"].write()
+    
+def def_sleep():
+    global colores
+    colores = [0,0,0]
+    pines["rgb"][0] = colores
+    pines["rgb"].write()
+    lightsleep()
+    
+funciones = {
+    "b1": def_color_fijo,
+    "b2": def_secuencia,
+    "b3": def_sleep
+    }
+
+last_ms = {}
+
+def configIO():
+    for nombre, cfg in btns.items():
+        pines[nombre] = Pin(cfg["pin"], Pin.IN, cfg["pull"])
+    pines["rgb"] = neopixel.NeoPixel(Pin(8),1)
+configIO()
+
+def leerBtn():
+    for nombre, cfg in btns.items():
+        if pines[nombre].value() == cfg["activo"]:
+            return nombre
+    return None
+
+btn = None
+while True:
+    lectura = leerBtn()
+    if lectura is not None:
+        btn = lectura
+        colores = [0,0,0]
+    if btn in btns:
+        funciones[btn]()
+        time.sleep_ms(100)

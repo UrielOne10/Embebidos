@@ -6,7 +6,7 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 | Variable | GPIO | Resistencia Interna | Función |
 |:----|:----|:----|:----|
 |btn1|1|PULL UP|Entrara al modo LIGHTSLEEP|
-|btn2|4|PULL DOWN|Movimiento en la pantalla LCD|
+|btn2|4|PULL DOWN|Configuracion de la pantalla LCD (multigestos)|
 |i2c|7 y 6|4.7k ohms|Mandar informaciòn a la pantalla LCD|
 
 ## Dispositivos I2C

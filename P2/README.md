@@ -39,8 +39,8 @@ Metodos usados desde micropython
 - [DeepSleep](https://docs.micropython.org/en/latest/library/machine.html#power-related-functions)
 - [Libreria NeoPixel](https://docs.micropython.org/en/latest/library/neopixel.html)
 - [Libreria LCD](https://newbiely.com/tutorials/esp32-micropython/esp32-micropython-lcd-i2c)
-- [Interrupciones Ext]
-- [Antirrebote]
+- [Interrupciones Ext](https://docs.micropython.org/en/latest/library/machine.Pin.html)
+- [Antirrebote](https://docs.micropython.org/en/latest/library/time.html#module-time)
 ## Conexión
 <img width="400" height="200" alt="image" src="https://github.com/UrielOne10/Embebidos/blob/c149b894bc3d42477683f97f84cab78171ba2865/P2/Pror.png" />
 

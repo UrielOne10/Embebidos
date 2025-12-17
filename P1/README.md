@@ -10,6 +10,19 @@ Se implementa el control de un LED RGB tipo NeoPixel mediante 3 botones físicos
 b2|3|Pull-down|Inicia una secuencia de arcoiris|
 b3|1|Pull-up|Apaga el LED y entra a modo DeepSleep|
 n|8|Sin definir|LED RGB incorporado|
+## Librerias utilizadas
+
+| Librerias | Función |
+|:----|:---------|
+| Machine | Pin:Control de los pines del esp, Deepsleep:Control de modo descanso profundo|
+| Neopixel | control de LED RGB |
+| Time | Control de delays |
+
+```python
+from machine import Pin, deepsleep
+from neopixel import NeoPixel 
+import time
+```
 
 Cabe mencionar que para realizar la funcion de los botones se utilizo unicamente el monitoreo constante de el valor del pin. Mientras que el pin 8 es el pin asociado a nuestro RGB, siendo esta asociación del GPIO obligatoria.
 

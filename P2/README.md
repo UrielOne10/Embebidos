@@ -9,7 +9,7 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 |btn2|4|PULL DOWN|Movimiento en la pantalla LCD|
 |i2c|7 y 6|4.7k ohms|Mandar informaciòn a la pantalla LCD|
 
-##Dispositivos I2C
+## Dispositivos I2C
 Los pines 7 y 6 en la placa ESP32C6 son SCL y SDA respectivamente, por lo tano primero se define al maestro para que empiece a escanear dispositivos, ya definidos, marcamos al esclavo para que funciones correctamente en base a la libreria de LCD
 ```python
 def config_i2c():

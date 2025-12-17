@@ -8,6 +8,22 @@ Se ingresara al modo ahorro de energia, al mismo tiempo saldra del mismo modo po
 |btn1|1|PULL UP|Entrara al modo LIGHTSLEEP|
 |btn2|4|PULL DOWN|Movimiento en la pantalla LCD|
 |i2c|7 y 6|4.7k ohms|Mandar informaciòn a la pantalla LCD|
+
+##Dispositivos I2C
+Los pines 7 y 6 en la placa ESP32C6 son SCL y SDA respectivamente, por lo tano primero se define al maestro para que empiece a escanear dispositivos, ya definidos, marcamos al esclavo para que funciones correctamente en base a la libreria de LCD
+```python
+def config_i2c():
+    i2c = I2C(scl=7,sda=6,freq=400000)
+    devices = i2c.scan()
+    if devices:
+        print("Dispositivos encontrados:", len(devices))
+        for d in devices:
+            print("I2C device encontrado en dirección:", hex(d))
+    else:
+        print("No se encontraron dispositivos I2C")  
+    pines["lcd"]=I2cLcd(i2c,0x27,2,16)
+```
+
 ## Funcionalidad del sistema de gestos
 tendrá 3 configuraciones basadas en la cantidad de pulsaciones en un tiempo determinado
 | Pulsos | Función |
@@ -16,6 +32,7 @@ tendrá 3 configuraciones basadas en la cantidad de pulsaciones en un tiempo det
 | 2 | El mensaje realiza un corrimiento de derecha a izquierda |  
 | 3 | El mensaje se queda quieto |  
 
+## Funcionalidad del sistema antirrebotes
 Para evitar entradas rebote por parte de la acción mecánica del boton, se adapto una funcion de antirrebote
 
 ```python
@@ -28,7 +45,7 @@ def antirrebote(nombre, intervalo_ms=500):
     last_ms[nombre] = now
     return True
 ```
-Cabe mencionar que, el mismo "btn1" mantendra un mensaje estatitco con el cual se sabra si salio del mismo modo LIGHTSLEEP. Con ello los pines 7 y 8 estan predeterminados para el modo i2c de la pantalla LCD con el ESP32, siendo su comunicaiòn SCL Y SDA.
+
 
 ## Hardware
 - Esp32 C6

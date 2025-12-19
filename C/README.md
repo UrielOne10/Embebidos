@@ -6,4 +6,5 @@
 - [Espressif IDE](https://docs.espressif.com/projects/espressif-ide/en/latest/downloads.html)
 
 ## Pasos
-1. Ya en el link de [Esp IDF](https://dl.espressif.com/dl/esp-idf/?idf=4.4), seleccionamos 
+1. Ya en el link de [Esp IDF](https://dl.espressif.com/dl/esp-idf/?idf=4.4), seleccionamos:
+![ESP-IDF setup screen](images/recursos/Esp_IDF.png)

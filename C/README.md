@@ -1,14 +1,12 @@
 # Instalacion
 
 ## Descargas
-- [Esp IDF](https://dl.espressif.com/dl/esp-idf/?idf=4.4)
-- [Git](https://git-scm.com/install/windows)
 - [Espressif IDE](https://docs.espressif.com/projects/espressif-ide/en/latest/downloads.html)
 
 ## Pasos
 1. Ya en el link de [Espressif IDE](https://docs.espressif.com/projects/espressif-ide/en/latest/downloads.html), seleccionamos:
 <p align="center">
-<img src="recursos/ESP_IDF.png" alt="ESP-IDF download" width="300">
+<img src="recursos/descarga.png" alt="ESP-IDE" width="300">
 </p>
 2. Se descomprime el archivo descargado y entrar a la ruta:
 
@@ -19,8 +17,14 @@
 > espressif-ide.exe
 
 4. Elegir una direccion de *workspace*:
-
+<p align="center">
+<img src="recursos/directorio.png" alt="workspace" width="300">
+</p>
 5. Seleecionamos que si:
-6. Creamos nueva instalacion:
-7. Seleccionamos instalacion facil:
-8. 
+<p align="center">
+<img src="recursos/requerimientos.png" alt="workspace" width="300">
+</p>
+6. Creamos nueva instalacion y seleccionamos instalacion facil:
+<p align="center">
+<img src="recursos/facil_instalacion.png" alt="workspace" width="300">
+</p>

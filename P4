@@ -1,0 +1,43 @@
+from mfrc522 import MFRC522
+from machine import Pin
+import time
+
+rdr = MFRC522(sck=18, mosi=23, miso=19, rst=22, cs=5)
+
+print("Tarjeta RFID")
+
+while True:
+    (stat, tag_type) = rdr.request(rdr.REQIDL)
+
+    if stat == rdr.OK:
+        print("Tarjeta detectada")
+
+        (stat, uid) = rdr.anticoll()
+
+        if stat == rdr.OK:
+            print("UID:", uid)
+
+            if rdr.select_tag(uid) == rdr.OK:
+
+                
+                key = [255, 255, 255, 255, 255, 255]
+
+                if rdr.auth(rdr.AUTHENT1A, 8, key, uid) == rdr.OK:
+
+                    print("Autenticado correctamente")
+
+                    data = "Jose Angel"
+                    data_bytes = [ord(c) for c in data]
+
+                    rdr.write(8, data_bytes)
+                    print("Datos escritos")
+
+                    read_data = rdr.read(8)
+
+                    if read_data:
+                        texto = "".join([chr(i) for i in read_data])
+                        print("Leido:", texto)
+
+                    rdr.stop_crypto1()
+
+    time.sleep(0.5)
